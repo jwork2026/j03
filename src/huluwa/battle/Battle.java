@@ -32,23 +32,33 @@ public class Battle {
         engine.frame(sides[0].describe() + "，" + sides[1].describe() + "，战斗开始！");
         for (int round = 1; round <= maxRounds; round++) {
             for (Side side : sides) {
-                Camp winner = findWinner();
-                if (winner != null) {
-                    engine.frame(winner.getDisplayName() + "一方获胜！");
+                if (announceWinnerIfDecided()) {
                     return;
                 }
-                BattleAction action = side.tactic.nextAction(engine.getBattlefield(), side.camp);
-                if (action == null) {
+                BattleAction[] actions = side.tactic.nextActions(engine.getBattlefield(), side.camp);
+                if (actions.length == 0) {
                     engine.frame(side.camp.getDisplayName() + "一方按兵不动。");
-                } else {
+                }
+                for (BattleAction action : actions) {
                     action.execute(engine);
+                    if (announceWinnerIfDecided()) {
+                        return;
+                    }
                 }
             }
         }
-        Camp winner = findWinner();
-        engine.frame(winner == null
+        engine.frame(findWinner() == null
                 ? "鸣金收兵，胜负未分。"
-                : winner.getDisplayName() + "一方获胜！");
+                : findWinner().getDisplayName() + "一方获胜！");
+    }
+
+    private boolean announceWinnerIfDecided() {
+        Camp winner = findWinner();
+        if (winner == null) {
+            return false;
+        }
+        engine.frame(winner.getDisplayName() + "一方获胜！");
+        return true;
     }
 
     /**

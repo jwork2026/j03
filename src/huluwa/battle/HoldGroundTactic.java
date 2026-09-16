@@ -6,7 +6,7 @@ import huluwa.creature.Camp;
 import huluwa.creature.Creature;
 
 /**
- * 坚壁清野：全军按兵不动，只有敌人贴身时才出手迎击。
+ * 坚壁清野：全军按兵不动，谁身旁有敌人贴身，谁就出手迎击。
  */
 public class HoldGroundTactic implements Tactic {
     private static final int[][] NEIGHBOR_OFFSETS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
@@ -17,7 +17,9 @@ public class HoldGroundTactic implements Tactic {
     }
 
     @Override
-    public BattleAction nextAction(Battlefield battlefield, Camp self) {
+    public BattleAction[] nextActions(Battlefield battlefield, Camp self) {
+        BattleAction[] actions = new BattleAction[battlefield.size() * battlefield.size()];
+        int count = 0;
         for (int row = 1; row <= battlefield.size(); row++) {
             for (int column = 1; column <= battlefield.size(); column++) {
                 Position position = new Position(row, column);
@@ -27,11 +29,13 @@ public class HoldGroundTactic implements Tactic {
                 }
                 Position enemy = adjacentEnemy(battlefield, position, self);
                 if (enemy != null) {
-                    return new AttackAction(position, enemy);
+                    actions[count++] = new AttackAction(position, enemy);
                 }
             }
         }
-        return null;
+        BattleAction[] result = new BattleAction[count];
+        System.arraycopy(actions, 0, result, 0, count);
+        return result;
     }
 
     private Position adjacentEnemy(Battlefield battlefield, Position position, Camp self) {

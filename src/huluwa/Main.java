@@ -17,7 +17,7 @@ import huluwa.formation.LongSnakeFormation;
 public class Main {
     public static void main(String[] args) {
         Battlefield battlefield = new Battlefield(11);
-        GameEngine engine = new GameEngine(battlefield, new ConsoleRenderer(), 300);
+        GameEngine engine = new GameEngine(battlefield, new ConsoleRenderer(), 200);
         Grandpa grandpa = new Grandpa();
         Snake snake = new Snake();
 

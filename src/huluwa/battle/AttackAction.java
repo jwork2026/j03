@@ -25,6 +25,10 @@ public class AttackAction implements BattleAction {
     public void execute(GameEngine engine) {
         Creature attacker = engine.getBattlefield().creatureAt(attackerPosition);
         Creature defender = engine.getBattlefield().creatureAt(defenderPosition);
+        // 战局已变（任一方已被打飞或换人），本动作作废。
+        if (attacker == null || defender == null || attacker.getCamp() == defender.getCamp()) {
+            return;
+        }
         if (attacker.getPower() > defender.getPower()) {
             engine.remove(defenderPosition,
                     attacker.getName() + "大喝一声，把" + defender.getName() + "打飞出战场！");
