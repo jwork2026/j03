@@ -1,3 +1,7 @@
+package huluwa.formation;
+
+import huluwa.battlefield.Position;
+
 /**
  * 阵型生成的站位计划。
  *

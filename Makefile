@@ -3,8 +3,8 @@ JAVA := java
 JAVA_RELEASE := 17
 SOURCE_DIR := src
 OUTPUT_DIR := out
-MAIN_CLASS := Main
-SOURCES := $(wildcard $(SOURCE_DIR)/*.java)
+MAIN_CLASS := huluwa.Main
+SOURCES := $(shell find $(SOURCE_DIR) -name '*.java')
 COMPILE_MARKER := $(OUTPUT_DIR)/.compiled
 
 .PHONY: all compile run clean

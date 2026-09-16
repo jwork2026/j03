@@ -1,3 +1,7 @@
+package huluwa.battlefield;
+
+import huluwa.creature.Creature;
+
 /**
  * N×N 的战场。
  *
@@ -45,38 +49,6 @@ public class Battlefield {
                     "位置" + position + "已经被" + creatureAt(position).getName() + "占据。");
         }
         cells[position.getRow() - 1][position.getColumn() - 1] = creature;
-    }
-
-    /**
-     * 打印战场，空格子显示为“·”。
-     */
-    public void print() {
-        for (Creature[] row : cells) {
-            StringBuilder line = new StringBuilder();
-            for (Creature creature : row) {
-                line.append(symbolOf(creature)).append(' ');
-            }
-            System.out.println(line.toString().stripTrailing());
-        }
-    }
-
-    private String symbolOf(Creature creature) {
-        if (creature == null) {
-            return "·";
-        }
-        if (creature instanceof Huluwa) {
-            return String.valueOf(((Huluwa) creature).getRank());
-        }
-        if (creature instanceof Grandpa) {
-            return "爷";
-        }
-        if (creature instanceof Snake) {
-            return "蛇";
-        }
-        if (creature instanceof Minion) {
-            return "妖";
-        }
-        return "?";
     }
 
     private void checkPosition(Position position) {

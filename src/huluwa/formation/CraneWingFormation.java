@@ -1,3 +1,7 @@
+package huluwa.formation;
+
+import huluwa.battlefield.Position;
+
 /**
  * 鹤翼阵：头领站在锚点，其余成员在头领身后左右展开成 V 字两翼。
  */

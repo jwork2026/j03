@@ -1,3 +1,5 @@
+package huluwa.creature;
+
 /**
  * 蛇精手下的小妖。
  *

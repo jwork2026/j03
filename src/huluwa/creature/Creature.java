@@ -1,3 +1,5 @@
+package huluwa.creature;
+
 /**
  * 战场上的生物。
  *

@@ -1,3 +1,5 @@
+package huluwa.battlefield;
+
 /**
  * 战场上的一个位置，行列均从 1 开始。
  */

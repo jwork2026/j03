@@ -1,3 +1,7 @@
+package huluwa.formation;
+
+import huluwa.battlefield.Position;
+
 /**
  * 长蛇阵：从锚点开始，纵向排成一列。
  */

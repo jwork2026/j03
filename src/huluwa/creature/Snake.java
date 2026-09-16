@@ -1,3 +1,10 @@
+package huluwa.creature;
+
+import huluwa.battlefield.Position;
+import huluwa.engine.GameEngine;
+import huluwa.formation.Formation;
+import huluwa.formation.FormationPlan;
+
 /**
  * 率领小妖摆阵的蛇精。
  */
@@ -14,13 +21,12 @@ public class Snake extends Creature {
     /**
      * 指挥小妖按阵型站位。
      */
-    public void command(Formation formation, Minion[] minions, Battlefield battlefield, Position anchor) {
+    public void command(Formation formation, Minion[] minions, GameEngine engine, Position anchor) {
         FormationPlan plan = formation.plan(minions.length, anchor);
-        System.out.printf("%s说：摆%s！%n", getName(), formation.getName());
+        engine.frame(getName() + "说：摆" + formation.getName() + "！");
         for (int i = 0; i < plan.size(); i++) {
             Position position = plan.positionAt(i);
-            battlefield.place(minions[i], position);
-            System.out.printf("%s站到%s。%n", minions[i].getName(), position);
+            engine.place(minions[i], position, minions[i].getName() + "站到" + position + "。");
         }
     }
 }

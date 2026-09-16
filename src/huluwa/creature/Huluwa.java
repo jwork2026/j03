@@ -1,3 +1,5 @@
+package huluwa.creature;
+
 /**
  * 七个葫芦娃。
  *
