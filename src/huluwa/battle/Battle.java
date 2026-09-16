@@ -18,6 +18,9 @@ public class Battle {
 
     public Battle(GameEngine engine, Camp firstCamp, Tactic firstTactic,
                   Camp secondCamp, Tactic secondTactic) {
+        if (firstCamp == secondCamp) {
+            throw new IllegalArgumentException("交战双方必须来自不同阵营。");
+        }
         this.engine = engine;
         this.sides = new Side[] {
                 new Side(firstCamp, firstTactic),
@@ -47,9 +50,10 @@ public class Battle {
                 }
             }
         }
-        engine.frame(findWinner() == null
+        Camp winner = findWinner();
+        engine.frame(winner == null
                 ? "鸣金收兵，胜负未分。"
-                : findWinner().getDisplayName() + "一方获胜！");
+                : winner.getDisplayName() + "一方获胜！");
     }
 
     private boolean announceWinnerIfDecided() {

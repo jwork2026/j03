@@ -37,6 +37,20 @@ public class Battlefield {
     }
 
     /**
+     * 生物当前所在的位置；不在战场上则返回 null。
+     */
+    public Position positionOf(Creature creature) {
+        for (int row = 0; row < cells.length; row++) {
+            for (int column = 0; column < cells.length; column++) {
+                if (cells[row][column] == creature) {
+                    return new Position(row + 1, column + 1);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * 让生物站上指定位置。
      */
     public void place(Creature creature, Position position) {
@@ -47,6 +61,10 @@ public class Battlefield {
         if (isOccupied(position)) {
             throw new IllegalStateException(
                     "位置" + position + "已经被" + creatureAt(position).getName() + "占据。");
+        }
+        if (positionOf(creature) != null) {
+            throw new IllegalStateException(
+                    creature.getName() + "已经站在" + positionOf(creature) + "，不能同时占据两个格子。");
         }
         cells[position.getRow() - 1][position.getColumn() - 1] = creature;
     }

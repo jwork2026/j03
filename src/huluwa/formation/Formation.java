@@ -33,6 +33,14 @@ public abstract class Formation {
         if (plan == null || plan.size() != memberCount) {
             throw new IllegalStateException(name + "没有为每个成员安排位置。");
         }
+        for (int i = 0; i < plan.size(); i++) {
+            for (int j = i + 1; j < plan.size(); j++) {
+                if (plan.positionAt(i).equals(plan.positionAt(j))) {
+                    throw new IllegalStateException(
+                            name + "给两个成员安排了同一个位置：" + plan.positionAt(i));
+                }
+            }
+        }
         return plan;
     }
 
