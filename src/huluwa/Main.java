@@ -2,6 +2,7 @@ package huluwa;
 
 import huluwa.battle.Battle;
 import huluwa.battle.CaptureLeaderTactic;
+import huluwa.battle.HoldGroundTactic;
 import huluwa.battlefield.Battlefield;
 import huluwa.battlefield.Position;
 import huluwa.creature.Camp;
@@ -32,7 +33,7 @@ public class Main {
 
         Battle battle = new Battle(engine,
                 Camp.HULUWA, new CaptureLeaderTactic(),
-                Camp.DEMON, new CaptureLeaderTactic());
+                Camp.DEMON, new HoldGroundTactic());
         battle.fight(30);
     }
 }
