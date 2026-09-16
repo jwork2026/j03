@@ -9,7 +9,7 @@ public class Minion extends Creature {
     private final int number;
 
     public Minion(int number) {
-        super("小妖" + number + "号");
+        super("小妖" + number + "号", Camp.DEMON, 2);
         this.number = number;
     }
 

@@ -10,7 +10,12 @@ import huluwa.formation.FormationPlan;
  */
 public class Grandpa extends Creature {
     public Grandpa() {
-        super("爷爷");
+        super("爷爷", Camp.HULUWA, 3);
+    }
+
+    @Override
+    public boolean isLeader() {
+        return true;
     }
 
     @Override

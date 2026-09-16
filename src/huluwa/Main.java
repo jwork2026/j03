@@ -1,7 +1,10 @@
 package huluwa;
 
+import huluwa.battle.Battle;
+import huluwa.battle.CaptureLeaderTactic;
 import huluwa.battlefield.Battlefield;
 import huluwa.battlefield.Position;
+import huluwa.creature.Camp;
 import huluwa.creature.Grandpa;
 import huluwa.creature.Huluwa;
 import huluwa.creature.Minion;
@@ -27,13 +30,9 @@ public class Main {
 
         engine.frame("两军对峙。");
 
-        engine.frame("蛇精说：小的们，给我上！");
-        engine.move(new Position(6, 5), new Position(6, 4), "小妖6号扑向四娃。");
-        engine.remove(new Position(6, 4), "四娃大喝一声，一拳把小妖6号打飞出战场！");
-        engine.move(new Position(5, 6), new Position(5, 5), "小妖4号硬着头皮冲向三娃。");
-        engine.move(new Position(5, 5), new Position(5, 4), "小妖4号步步逼近。");
-        engine.remove(new Position(5, 4), "三娃钢筋铁骨纹丝不动，小妖4号自己撞晕了过去！");
-        engine.frame("蛇精说：好汉不吃眼前亏，撤！");
-        engine.frame("葫芦娃初战告捷。");
+        Battle battle = new Battle(engine,
+                Camp.HULUWA, new CaptureLeaderTactic(),
+                Camp.DEMON, new CaptureLeaderTactic());
+        battle.fight(30);
     }
 }

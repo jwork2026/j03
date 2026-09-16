@@ -3,7 +3,7 @@ package huluwa.creature;
 /**
  * 七个葫芦娃。
  *
- * <p>排行、称呼和颜色是葫芦娃固有的身份信息。</p>
+ * <p>排行、称呼和颜色是葫芦娃固有的身份信息；排行越靠前战力越强。</p>
  */
 public class Huluwa extends Creature {
     public static final Huluwa FIRST = new Huluwa(1, "大娃", "红色");
@@ -22,7 +22,7 @@ public class Huluwa extends Creature {
     private final String color;
 
     private Huluwa(int rank, String name, String color) {
-        super(name);
+        super(name, Camp.HULUWA, 8 - rank);
         this.rank = rank;
         this.color = color;
     }

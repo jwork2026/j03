@@ -10,7 +10,12 @@ import huluwa.formation.FormationPlan;
  */
 public class Snake extends Creature {
     public Snake() {
-        super("蛇精");
+        super("蛇精", Camp.DEMON, 5);
+    }
+
+    @Override
+    public boolean isLeader() {
+        return true;
     }
 
     @Override
