@@ -51,6 +51,40 @@ public class Battlefield {
         cells[position.getRow() - 1][position.getColumn() - 1] = creature;
     }
 
+    /**
+     * 让生物从一个格子走到相邻的空格子。
+     *
+     * <p>战场不允许“瞬移”：一步只能走到上下左右相邻的格子。</p>
+     */
+    public void moveCreature(Position from, Position to) {
+        Creature creature = creatureAt(from);
+        if (creature == null) {
+            throw new IllegalStateException("位置" + from + "上没有生物。");
+        }
+        if (!from.isAdjacentTo(to)) {
+            throw new IllegalArgumentException("生物一步只能走到相邻格子：" + from + "→" + to);
+        }
+        checkPosition(to);
+        if (isOccupied(to)) {
+            throw new IllegalStateException(
+                    "位置" + to + "已经被" + creatureAt(to).getName() + "占据。");
+        }
+        cells[to.getRow() - 1][to.getColumn() - 1] = creature;
+        cells[from.getRow() - 1][from.getColumn() - 1] = null;
+    }
+
+    /**
+     * 让生物离开战场（如战败退场）。
+     */
+    public Creature removeCreature(Position position) {
+        Creature creature = creatureAt(position);
+        if (creature == null) {
+            throw new IllegalStateException("位置" + position + "上没有生物。");
+        }
+        cells[position.getRow() - 1][position.getColumn() - 1] = null;
+        return creature;
+    }
+
     private void checkPosition(Position position) {
         if (!contains(position)) {
             throw new IndexOutOfBoundsException("位置超出战场范围：" + position);

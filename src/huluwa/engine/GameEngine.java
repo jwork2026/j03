@@ -40,6 +40,22 @@ public class GameEngine {
     }
 
     /**
+     * 让生物走一步（相邻格子），并把结果渲染为一帧。
+     */
+    public void move(Position from, Position to, String caption) {
+        battlefield.moveCreature(from, to);
+        frame(caption);
+    }
+
+    /**
+     * 让生物退场，并把结果渲染为一帧。
+     */
+    public void remove(Position position, String caption) {
+        battlefield.removeCreature(position);
+        frame(caption);
+    }
+
+    /**
      * 把当前战场渲染为一帧画面。
      */
     public void frame(String caption) {

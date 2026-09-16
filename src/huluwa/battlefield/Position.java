@@ -30,6 +30,17 @@ public final class Position {
         return new Position(row + rowOffset, column + columnOffset);
     }
 
+    /**
+     * 判断另一个位置是否与本位置相邻（上下左右四个方向）。
+     */
+    public boolean isAdjacentTo(Position other) {
+        if (other == null) {
+            return false;
+        }
+        int distance = Math.abs(row - other.row) + Math.abs(column - other.column);
+        return distance == 1;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
